@@ -59,6 +59,43 @@
       // ❗ WARNING: except for `getAllReversed`, methods must respect the order of the integers
       // ❗ WARNING: note that none of the methods actually mutate the `ints` property
 
+      function NumberContainer(...args) {
+  this.ints = [...args]; // Using the spread operator to create a copy of the arguments as an array
+}
+
+NumberContainer.prototype.getAll = function() {
+  return this.ints;
+};
+
+NumberContainer.prototype.getEvens = function() {
+  return this.ints.filter(num => num % 2 === 0);
+};
+
+NumberContainer.prototype.getNegatives = function() {
+  return this.ints.filter(num => num < 0);
+};
+
+NumberContainer.prototype.getAllSquared = function() {
+  return this.ints.map(num => num * num);
+};
+
+NumberContainer.prototype.pop = function() {
+  return this.ints.pop();
+};
+
+NumberContainer.prototype.push = function(num) {
+  this.ints.push(num);
+  return this.ints;
+};
+
+NumberContainer.prototype.getEveryNth = function(n) {
+  return this.ints.filter((_, index) => index % n === 0);
+};
+
+NumberContainer.prototype.getAllReversed = function() {
+  return this.ints.slice().reverse(); // Create a copy of the array before reversing to avoid mutation
+}
+
     }
 
     // 👉 CHALLENGE 2 NerfGun
