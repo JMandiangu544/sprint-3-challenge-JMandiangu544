@@ -60,7 +60,9 @@
       // ❗ WARNING: note that none of the methods actually mutate the `ints` property
 
       
+  function NumberContainer(...args) {
   this.ints = [...args]; // Using the spread operator to create a copy of the arguments as an array
+}
 
 NumberContainer.prototype.getAll = function() {
   return this.ints;
@@ -93,9 +95,19 @@ NumberContainer.prototype.getEveryNth = function(n) {
 
 NumberContainer.prototype.getAllReversed = function() {
   return this.ints.slice().reverse(); // Create a copy of the array before reversing to avoid mutation
-}
+};
 
-    }
+// Example usage:
+const numbers = new NumberContainer(1, -2, 3, 4, -5, 6);
+console.log(numbers.getAll()); // [1, -2, 3, 4, -5, 6]
+console.log(numbers.getEvens()); // [-2, 4, 6]
+console.log(numbers.getNegatives()); // [-2, -5]
+console.log(numbers.getAllSquared()); // [1, 4, 9, 16, 25, 36]
+console.log(numbers.pop()); // 6
+console.log(numbers.push(7)); // [1, -2, 3, 4, -5, 7]
+console.log(numbers.getEveryNth(2)); // [1, 3, -5]
+console.log(numbers.getAllReversed()); // [7, -5, 4, 3, -2, 1]
+console.log(numbers.getAll()); // [1, -2, 3, 4, -5, 7] (original array is not mutated)
 
     // 👉 CHALLENGE 2 NerfGun
     class NerfGun {
