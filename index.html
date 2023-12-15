@@ -78,7 +78,49 @@
       //      * When disengaging the safety, return "Safety disabled!"
       // 🌟 HINT: instances need to keep track of their maximum capacity as well as their current capacity
 
+      class NerfGun {
+  constructor(totalProjectiles) {
+    this.maxCapacity = totalProjectiles;
+    this.currentCapacity = totalProjectiles;
+    this.safetyOn = true;
+  }
+
+  shoot() {
+    if (this.currentCapacity > 0 && !this.safetyOn) {
+      this.currentCapacity--;
+      return "Bang!";
+    } else {
+      return "Click!";
     }
+  }
+
+  reload(amount) {
+    if (typeof amount === 'number' && amount > 0) {
+      this.currentCapacity = Math.min(this.maxCapacity, this.currentCapacity + amount);
+      return `${this.currentCapacity} projectiles left!`;
+    } else {
+      return "Error reloading!";
+    }
+  }
+
+  toggleSafety() {
+    this.safetyOn = !this.safetyOn;
+    return this.safetyOn ? "Safety enabled!" : "Safety disabled!";
+  }
+}
+
+// Example usage:
+const nerfGun = new NerfGun(10);
+console.log(nerfGun.shoot()); // "Click!" (safety is on)
+console.log(nerfGun.toggleSafety()); // "Safety disabled!"
+console.log(nerfGun.shoot()); // "Bang!" (safety is off, and there is ammo)
+console.log(nerfGun.reload(5)); // "5 projectiles left!"
+console.log(nerfGun.reload("invalid")); // "Error reloading!"
+console.log(nerfGun.reload(20)); // "10 projectiles left!" (capacity is capped at 10)
+console.log(nerfGun.toggleSafety()); // "Safety enabled!"
+
+
+
 
     // 👉 CHALLENGE 3 EBook
     class EBook {
