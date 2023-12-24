@@ -272,7 +272,7 @@ console.log(ebook.back()); // null (already at the beginning)
   }
 
   work() {
-    if (this.ants.length === 0) {
+    if (this.ants.length !== 0) {
       return "No ants here. Did you work them to death?";
     }
 
