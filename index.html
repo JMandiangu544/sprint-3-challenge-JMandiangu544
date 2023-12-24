@@ -276,29 +276,39 @@ console.log(ebook.back()); // null (already at the beginning)
       return "No ants here. Did you work them to death?";
     }
 
-    const initialAntCount = this.ants.length;
-    this.ants = this.ants.filter(ant => {
+    this.ants = this.ants.map(ant => {
       ant.health -= 20;
-      return ant.health > 0;
-    });
+      if (ant.health <= 0) {
+        // Ant dies if health is zero or below
+        return null;
+      }
+      return ant;
+    }).filter(Boolean);
 
-    const remainingAntCount = this.ants.length;
-    const antsWorked = initialAntCount - remainingAntCount;
-
-    return `${antsWorked} ants starting work!`;
+    return `${this.ants.length} ants starting work!`;
   }
 
   feed(antName) {
-    const ant = this.ants.find(ant => ant.name === antName);
+    const antIndex = this.ants.findIndex(ant => ant.name === antName);
 
-    if (ant) {
-      ant.health += 15;
+    if (antIndex !== -1) {
+      // Increase health by 15 points
+      this.ants[antIndex].health += 15;
       return "Yum!";
     } else {
       return `${antName} not found!`;
     }
   }
 }
+
+// Example usage:
+const farm = new AntFarm('Jess', 'Blake');
+console.log(farm.ants);       // [{name: 'Jess', health: 100}, {name: 'Blake', health: 100}]
+console.log(farm.work());     // "2 ants starting work!"
+console.log(farm.ants);       // [{name: 'Jess', health: 80}, {name: 'Blake', health: 80}]
+console.log(farm.feed('Jess'));// "Yum!"
+console.log(farm.ants);       // [{name: 'Jess', health: 95}, {name: 'Blake', health: 80}]
+
 /*
 // Example usage:
 const farm = new AntFarm('Jess', 'Blake');
