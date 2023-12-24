@@ -267,19 +267,20 @@ console.log(ebook.back()); // null (already at the beginning)
       // 👉 HINT: if you are not feeling confident with map and filter, solve the problem with for loops,
       //      and with the piece of mind of all tests passing, refactor to use map/filter
 
+  class AntFarm {
   constructor(...antNames) {
     this.ants = antNames.map(name => ({ name, health: 100 }));
   }
 
   work() {
-    if (this.ants.length !== 0) {
+    if (this.ants.length === 0) {
       return "No ants here. Did you work them to death?";
     }
 
+    // Rest of the work method implementation (as provided in the previous example)
     this.ants = this.ants.map(ant => {
       ant.health -= 20;
       if (ant.health <= 0) {
-        // Ant dies if health is zero or below
         return null;
       }
       return ant;
@@ -292,7 +293,6 @@ console.log(ebook.back()); // null (already at the beginning)
     const antIndex = this.ants.findIndex(ant => ant.name === antName);
 
     if (antIndex !== -1) {
-      // Increase health by 15 points
       this.ants[antIndex].health += 15;
       return "Yum!";
     } else {
@@ -300,6 +300,10 @@ console.log(ebook.back()); // null (already at the beginning)
     }
   }
 }
+
+// Example usage:
+const farm = new AntFarm();
+console.log(farm.work()); // "No ants here. Did you work them to death?"
 
 // Example usage:
 const farm = new AntFarm('Jess', 'Blake');
