@@ -288,6 +288,7 @@ console.log(ebook.back()); // null (already at the beginning)
   } 
 
   feed(antName) {
+    this.ants = antNames.map(name => ({ name, health: 100 }))
     const ant = this.findAntByName(antName);
     if (ant) {
       ant.health += 15;
