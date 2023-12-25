@@ -288,16 +288,15 @@ console.log(ebook.back()); // null (already at the beginning)
   } 
 
   feed(antName) {
-    const ant = this.findAntByName(antName);
+    const ant = this.findAntByName(antName)
     if (ant) {
       ant.health += 15;
       return "Yum!";
     } else { 
-      return `${antName} not found!`;
+      return `${antName} not found!;
     }
   }
-
-  removeDeadAnt(deadAnt) {
+removeDeadAnt(deadAnt) {
     this.ants = this.ants.filter(ant => ant !== deadAnt);
   }
 
