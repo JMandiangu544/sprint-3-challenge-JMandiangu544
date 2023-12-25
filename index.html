@@ -276,48 +276,47 @@ console.log(ebook.back()); // null (already at the beginning)
       return "No ants here. Did you work them to death?";
     }
 
-    this.ants = this.ants.map(ant => {
+    let message = `${this.ants.length} ants starting work!`;
+    this.ants.forEach(ant => {
       ant.health -= 20;
       if (ant.health <= 0) {
-        // Ant dies if health is zero or below
-        return null;
+        this.removeDeadAnt(ant);
       }
-      return ant;
-    }).filter(Boolean);
+    });
 
-    return `${this.ants.length} ants starting work!`;
+    return message;
   }
 
   feed(antName) {
-    const antIndex = this.ants.findIndex(ant => ant.name === antName);
-
-    if (antIndex !== -1) {
-      // Increase health by 15 points
-      this.ants[antIndex].health += 15;
+    const ant = this.findAntByName(antName);
+    if (ant) {
+      ant.health += 15;
       return "Yum!";
     } else {
       return `${antName} not found!`;
     }
   }
+
+  removeDeadAnt(deadAnt) {
+    this.ants = this.ants.filter(ant => ant !== deadAnt);
+  }
+
+  findAntByName(antName) {
+    return this.ants.find(ant => ant.name === antName);
+  }
 }
 
-// Example usage:
-const farm = new AntFarm('Jess', 'Blake');
-console.log(farm.ants);       // [{name: 'Jess', health: 100}, {name: 'Blake', health: 100}]
-console.log(farm.work());     // "2 ants starting work!"
-console.log(farm.ants);       // [{name: 'Jess', health: 80}, {name: 'Blake', health: 80}]
-console.log(farm.feed('Jess'));// "Yum!"
-console.log(farm.ants);       // [{name: 'Jess', health: 95}, {name: 'Blake', health: 80}]
+// Example Usage:
+const antFarm = new AntFarm("Ant1", "Ant2", "Ant3");
 
-/*
-// Example usage:
-const farm = new AntFarm('Jess', 'Blake');
-console.log(farm.ants);   // [{name: 'Jess', health: 100}, {name: 'Blake', health: 100}]
-console.log(farm.work()); // "2 ants starting work!"
-console.log(farm.ants);   // [{name: 'Jess', health: 80}, {name: 'Blake', health: 80}]
-console.log(farm.feed('Jess')); // "Yum!"
-console.log(farm.ants);   // [{name: 'Jess', health: 95}, {name: 'Blake', health: 80}]
-*/
+console.log(antFarm.work()); // Output: "3 ants starting work!"
+
+console.log(antFarm.feed("Ant2")); // Output: "Yum!"
+
+console.log(antFarm.work()); // Output: "2 ants starting work!"
+
+console.log(antFarm.feed("Ant4")); // Output: "Ant4 not found!"
+
 
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
