@@ -267,37 +267,33 @@ console.log(ebook.back()); // null (already at the beginning)
       // 👉 HINT: if you are not feeling confident with map and filter, solve the problem with for loops,
       //      and with the piece of mind of all tests passing, refactor to use map/filter
 
-  constructor(...antNames) {
-    this.ants = antNames.map(name => ({ name, health: 100 }))
-  }
-
-  work() {
-    if (this.ants.length === 0) {
-      return "No ants here. Did you work them to death?"
-    } 
-
-    let message = `${this.ants.length} ants starting work!`;
-    this.ants.forEach(ant => {
-      ant.health -= 20;
-      if (ant.health <= 0) {
-        this.removeDeadAnt(ant);
-      }
-    });
-
-    return message;
-  } 
-
-  feed(name) {
-    const antsToFeed = this.ants.filter(ant => ant.name === name);
-    if (antsToFeed.length === 0) {
-       return `${name} not found!`;
-    }
-    antsToFeed.forEach(ant => {
-     ant.health += 15; 
-    });
-      return "Yum!";
-    }
-    }
+ constructor(...args) {
+this.ants = args.map(name => ({ name, health: 100 }));
+}
+work() {
+if (this.ants.length === 0) {
+return "No ants here. Did you work them to death?";
+}
+for (let i = this.ants.length - 1; i >= 0; i--) {
+const ant = this.ants[i];
+ant.health -= 20;
+if (ant.health <= 0) {
+this.ants.splice(i, 1);
+}
+}
+return `${this.ants.length} ants starting work!`;
+}
+feed(name) {
+const antsToFeed = this.ants.filter(ant => ant.name === name);
+if (antsToFeed.length === 0) {
+return `${name} not found!`;
+}
+antsToFeed.forEach(ant => {
+ant.health += 15;
+});
+return "Yum!";
+}
+}
 
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
