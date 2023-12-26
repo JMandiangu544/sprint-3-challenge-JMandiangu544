@@ -278,7 +278,7 @@ for (let i = this.ants.length - 1; i >= 0; i--) {
 const ant = this.ants[i];
 ant.health -= 20;
 if (ant.health <= 0) {
-this.ants.splice(i, 3);
+this.ants.splice(i);
 }
 }
 return `${this.ants.length} ants starting work!`;
