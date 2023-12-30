@@ -268,7 +268,7 @@ console.log(ebook.back()); // null (already at the beginning)
       //      and with the piece of mind of all tests passing, refactor to use map/filter
 
   constructor(...antNames) {
-    this.ants = antNames.map(name => ({ name, health: 100 }))
+    this.ants = antNames.map(name => ({ name, health: 100 }));
   }
 
   work() {
@@ -276,24 +276,23 @@ console.log(ebook.back()); // null (already at the beginning)
       return "No ants here. Did you work them to death?"
     } 
 
-    let message = `${this.ants.length} ants starting work!`;
-    this.ants.forEach(ant => {
+    for (let ant of this.ants) {
       ant.health -= 20;
       if (ant.health <= 0) {
-        this.removeDeadAnt(ant);
+        this.ant = this.ants.filter(a => a.health > 0);
       }
-    });
+    }
 
-    return message;
+    return `${this.ants.length} ants starting work!`;
   } 
 
-  feed(antName) {
+  feed(name) {
     const ant = this.ants.find(ant => ant.name === name);
     if (ant) {
       ant.health += 15;
       return "Yum!";
     } else { 
-      return `${antName} not found!`;
+      return `${name} not found!`;
     }
   }
 
