@@ -297,13 +297,6 @@ console.log(ebook.back()); // null (already at the beginning)
     }
   }
 
-  removeDeadAnt(deadAnt) {
-    this.ants = this.ants.filter(ant => ant !== deadAnt);
-  }
-
-  findAntByName(antName) {
-    return this.ants.find(ant => ant.name === antName);
-  }
 }
 
 // Example Usage:
