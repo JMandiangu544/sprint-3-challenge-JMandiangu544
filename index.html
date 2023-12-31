@@ -271,35 +271,31 @@ console.log(ebook.back()); // null (already at the beginning)
     this.ants = ants.map(name => ({ name, health: 100 }));
   }
 
-  work() {
+  work() { 
     if (this.ants.length === 0) {
       return "No ants here. Did you work them to death?";
     }
+    const numOfAnts = this.ants.length 
 
     this.ants.forEach(ant => (ant.health -= 20));
     this.ants = this.ants.filter(ant => ant.health > 0);
 
-    return `${this.ants.length} ants starting work!`;
+    return `${numOfAnts} ants starting work!`;
   }
 
   feed(name) {
-    const ant = this.ants.find(ant => ant.name === name);
-    if (ant) {
-      ant.health += 15;
+    const antName = this.ants.find(ant => ant.name === name);
+    if (antName) {
+      this.ants.forEach(ant => {
+        if ( antName.name === ant.name ) 
+        ant.health += 15
+      })
       return "Yum!";
     } else {
       return `${name} not found!`;
     }
   }
 } 
-
-const farm = new AntFarm('Jess', 'Blake');
-console.log(farm.ants); // evaluates to [{name: 'Jess', health: 100}, {name: 'Blake', health: 100}]
-console.log(farm.work()); // returns "2 ants starting work!"
-console.log(farm.ants); // evaluates to [{name: 'Jess', health: 80}, {name: 'Blake', health: 80}]
-console.log(farm.feed('Jess')); // returns "Yum!"
-console.log(farm.ants); // evaluates to [{name: 'Jess', health: 95}, {name: 'Blake', health: 80}]
-
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
