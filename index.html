@@ -284,8 +284,8 @@ console.log(ebook.back()); // null (already at the beginning)
 
   feed(name) {
     const ant = this.ants.find(ant => ant.name === name);
-    if (ant) {
-      ant.health += 15;
+    if (ants) {
+      ants.health += 15;
       return "Yum!";
     } else {
       return `${name} not found!`;
